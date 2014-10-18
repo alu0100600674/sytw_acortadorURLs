@@ -8,10 +8,10 @@ require 'pp'
 #require 'socket'
 require 'data_mapper'
 
-DataMapper.setup( :default, ENV['DATABASE_URL'] || 
+DataMapper.setup( :default, ENV['DATABASE_URL'] ||
                             "sqlite3://#{Dir.pwd}/my_shortened_urls.db" )
 DataMapper::Logger.new($stdout, :debug)
-DataMapper::Model.raise_on_save_failure = true 
+DataMapper::Model.raise_on_save_failure = true
 
 require_relative 'model'
 
@@ -36,7 +36,7 @@ post '/' do
     begin
 #       @short_url = ShortenedUrl.first_or_create(:url => params[:url])
       @short_url = ShortenedUrl.first_or_create(:url => params[:url])
-	  @short_url = ShortenedUrl.first_or_create(:url_corta => params[:url_corta])
+      @short_url = ShortenedUrl.first_or_create(:url_corta => params[:url_corta])
     rescue Exception => e
       puts "EXCEPTION!!!!!!!!!!!!!!!!!!!"
       pp @short_url
