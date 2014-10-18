@@ -3,6 +3,14 @@
     %body
         =yield
         %form(action="/" method="POST")
+            %h1 AcortadorURLs
             %label(for="url")
+            Introduzca la URL que desea acortar:
+            %br
             %input(type="text" name="url" id="myurl" autofocus size=100 accesskey="s")
-            %input(type="submit" value="Shorten")
+            %br
+            %br
+            Introduzca un nombre para la URL corta:
+            %br
+            %input(type="text" name="url_corta" id="myurl_corta" size=50 accesskey="c")
+            %input(type="submit" value="Acortar")
