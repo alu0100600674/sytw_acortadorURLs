@@ -1,6 +1,7 @@
 *.swp
 *~
 
+my_shortened_urls.db
 
 .DS_Store
 .AppleDouble
