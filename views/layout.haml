@@ -15,7 +15,7 @@
                     %a.btn.btn-default{:href => "/auth/google_oauth2"}Iniciar Sesión con Google
                 -else
                     Hola, #{Email}
-                    %a.btn.btn-default{:href => "/cerrarSesionGoogle"}Cerrar Sesión
+                    %a.btn.btn-default{:href => "/auth/cerrarSesionGoogle"}Cerrar Sesión
             #formulario
                 %form.form-inline(action="/" method="POST")
                     .form-group

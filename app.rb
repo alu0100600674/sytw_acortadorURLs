@@ -84,12 +84,18 @@ get '/auth/:name/callback' do
       haml :index
     end
   else
-    redirect '/auth/failure'
+    redirect '/auth/error'
   end
 end
 
-get '/cerrarSesionGoogle' do
+get '/auth/error' do
   Email = ""
+  redirect '/'
+end
+
+get '/auth/cerrarSesionGoogle' do
+  Email = ""
+  # Falta cerrar la sesión de Google
   redirect '/'
 end
 
