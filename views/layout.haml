@@ -18,11 +18,11 @@
                         Convierte tu URL difícil de recordar en una más corta.
                         %br
                         %br
-                        %input.form-control(type="text" name="url" id="myurl" autofocus size=60 accesskey="s")
-                        %input.form-control(type="text" name="url_corta" id="myurl_corta" size=25 accesskey="c")
+                        %input.form-control(type="text" name="url" id="myurl" autofocus size=60 accesskey="s" placeholder="URL")
+                        %input.form-control(type="text" name="url_corta" id="myurl_corta" size=25 accesskey="c" placeholder="URL corta")
                         %input.btn.btn-default(type="submit" value="Acortar")
-            
             #datos
+                %h2 URLs Guardadas:
                 =yield
             #pie
                 Jonay Suárez Armas
