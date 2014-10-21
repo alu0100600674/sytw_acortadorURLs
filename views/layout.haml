@@ -9,6 +9,9 @@
         #contenedor
             #cabecera
                 %img.logo{:src => "/images/logo.png"}
+            #login
+                %br
+                %a.btn.btn-default{:href => "/auth/google_oauth2"}Iniciar Sesión con Google
             #formulario
                 %form.form-inline(action="/" method="POST")
                     .form-group

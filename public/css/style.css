@@ -8,6 +8,10 @@ body{
 	text-align: center;
 }
 
+#login{
+	text-align: center;
+}
+
 #formulario{
 	height: 200px;
 /* 	background-color: yellow; */

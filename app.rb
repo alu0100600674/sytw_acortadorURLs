@@ -7,6 +7,19 @@ require 'uri'
 require 'pp'
 #require 'socket'
 require 'data_mapper'
+require 'omniauth-oauth2'
+require 'omniauth-google-oauth2'
+require 'erubis'
+
+############OmniAuth Google####################
+use OmniAuth::Builder do
+  config = YAML.load_file 'config/config.yml'
+  provider :google_oauth2, config['identifier'], config['secret']
+end
+
+enable :sessions
+set :session_secret, '*&(^#234a)'
+###############################################
 
 DataMapper.setup( :default, ENV['DATABASE_URL'] ||
                             "sqlite3://#{Dir.pwd}/my_shortened_urls.db" )
@@ -57,6 +70,13 @@ get '/:shortened' do
   # is no longer at the original location. The two most commonly used
   # redirection status codes are 301 Move Permanently and 302 Found.
   redirect short_url.url, 301
+end
+
+get '/auth/:name/callback' do
+  @auth = request.env['omniauth.auth']
+  email = @auth['info'].email
+  
+
 end
 
 error do haml :index end
