@@ -22,7 +22,8 @@ set :session_secret, '*&(^#234a)'
 ###############################################
 
 DataMapper.setup( :default, ENV['DATABASE_URL'] ||
-                            "sqlite3://#{Dir.pwd}/my_shortened_urls.db" )
+                            "sqlite3://#{Dir.pwd}/my_shortened_urls.db" ) if development?
+DataMapper.setup( :default, ENV['DATABASE_URL'] ) if production?
 DataMapper::Logger.new($stdout, :debug)
 DataMapper::Model.raise_on_save_failure = true
 
