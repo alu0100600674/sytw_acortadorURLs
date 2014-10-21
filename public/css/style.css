@@ -1,0 +1,26 @@
+#cabecera{
+	height: 150px;
+	background-color: blue;
+	text-align: center;
+}
+
+#formulario{
+	height: 200px;
+	background-color: yellow;
+	text-align: center;
+}
+
+#datos{
+	background-color: green;
+	text-align: center;
+}
+
+#pie{
+	height: 50px;
+	background-color: red;
+	text-align: center;
+}
+
+.logo{
+	height: 150px;
+}

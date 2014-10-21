@@ -6,18 +6,29 @@
         %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}/
         %link{:href => "/css/style.css", :rel => "stylesheet"}/
     %body
-        =yield
-        %form(action="/" method="POST")
-            %h1 AcortadorURLs
-            %label(for="url")
-            Introduzca la URL que desea acortar:
-            %br
-            %input(type="text" name="url" id="myurl" autofocus size=100 accesskey="s")
-            %br
-            %br
-            Introduzca un nombre para la URL corta:
-            %br
-            %input(type="text" name="url_corta" id="myurl_corta" size=50 accesskey="c")
-            %input(type="submit" value="Acortar")
-            %script{src => "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"}
-            %script{src => "../js/bootstrap.min.js"}
+        #contenedor
+            #cabecera
+                %img.logo{:src => "/images/logo.png"}
+            #formulario
+                %form.form-inline(action="/" method="POST")
+                    .form-group
+                        %label(for="url")
+                        %br
+                        %br
+                        Convierte tu URL difícil de recordar en una más corta.
+                        %br
+                        %br
+                        %input.form-control(type="text" name="url" id="myurl" autofocus size=60 accesskey="s")
+                        %input.form-control(type="text" name="url_corta" id="myurl_corta" size=25 accesskey="c")
+                        %input.btn.btn-default(type="submit" value="Acortar")
+            
+            #datos
+                =yield
+            #pie
+                Jonay Suárez Armas
+                %br
+                Sistemas y Tecnologías Web | Grado en Ingeniería Informática | ETSII | ULL
+        
+        
+        %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"}
+        %script{:src => "/js/bootstrap.min.js"}
