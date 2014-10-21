@@ -34,10 +34,11 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 
 Base = 36
+Email = ""
 
 get '/' do
   puts "inside get '/': #{params}"
-  @list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20)
+  @list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :usuario => Email)
   # in SQL => SELECT * FROM "ShortenedUrl" ORDER BY "id" ASC
   haml :index
 end
@@ -47,7 +48,7 @@ post '/' do
   uri = URI::parse(params[:url])
   if uri.is_a? URI::HTTP or uri.is_a? URI::HTTPS then
     begin
-      @short_url = ShortenedUrl.first_or_create(:url => params[:url], :url_corta => params[:url_corta])
+      @short_url = ShortenedUrl.first_or_create(:url => params[:url], :url_corta => params[:url_corta], :usuario => Email)
     rescue Exception => e
       puts "EXCEPTION!!!!!!!!!!!!!!!!!!!"
       pp @short_url
@@ -74,9 +75,22 @@ end
 
 get '/auth/:name/callback' do
   @auth = request.env['omniauth.auth']
-  email = @auth['info'].email
+  Email = @auth['info'].email
   
+  if @auth then
+    begin
+      puts "inside get '/': #{params}"
+      @list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :usuario => Email)
+      haml :index
+    end
+  else
+    redirect '/auth/failure'
+  end
+end
 
+get '/cerrarSesionGoogle' do
+  Email = ""
+  redirect '/'
 end
 
 error do haml :index end
