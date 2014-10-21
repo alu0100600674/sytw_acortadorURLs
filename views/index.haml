@@ -1,4 +1,4 @@
 %ol
   - @list.each do |url|
     %li 
-      %a{:href=>"/#{url.id.to_s(Base)}"} #{url.url}
+      %a{:href=>"/#{url.url_corta.to_s}"} #{url.url}
