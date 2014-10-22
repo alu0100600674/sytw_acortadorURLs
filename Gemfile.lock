@@ -123,5 +123,6 @@ DEPENDENCIES
   omniauth
   omniauth-google-oauth2
   pg
+  rack-test
   sinatra-contrib
   sqlite3
