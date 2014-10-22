@@ -1,5 +1,6 @@
 *.swp
 *~
+.bundle/
 
 my_shortened_urls.db
 
