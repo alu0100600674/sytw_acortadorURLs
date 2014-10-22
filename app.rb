@@ -85,11 +85,11 @@ get '/auth/:name/callback' do
       haml :index
     end
   else
-    redirect '/auth/error'
+    redirect '/auth/failure'
   end
 end
 
-get '/auth/error' do
+get '/auth/failure' do
   Email = ""
   redirect '/'
 end
