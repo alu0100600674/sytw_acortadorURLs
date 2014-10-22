@@ -7,6 +7,7 @@ gem 'haml'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'erubis'
+gem 'rack-test'
 
 group :development do
   gem 'dm-sqlite-adapter'
