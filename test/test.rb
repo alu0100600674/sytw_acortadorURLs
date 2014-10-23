@@ -1,7 +1,8 @@
 ENV['RACK_ENV'] = 'test'
 require 'minitest/autorun'
 require 'rack/test'
-require_relative '../app.rb'
+require 'data_mapper'
+require_relative '../model.rb'
  
 include Rack::Test::Methods
  
@@ -9,31 +10,49 @@ def app
   Sinatra::Application
 end
 
-describe "Contenido de la web" do
+DataMapper.setup( :default, ENV['DATABASE_URL'] ||
+                            "sqlite3://#{Dir.pwd}/pruebas.db" )
+
+DataMapper::Logger.new($stdout, :debug)
+DataMapper::Model.raise_on_save_failure = true
+
+DataMapper.finalize
+
+#DataMapper.auto_migrate!
+DataMapper.auto_upgrade!
+
+
+describe "Probando la base de datos" do
 	
-	it "Carga de la web" do
-		get '/'
-		assert last_response.ok?
+	before :all do
+		@in1 = ShortenedUrl.first_or_create(:url => 'http://github.com', :url_corta => 'github', :usuario => '')
+		@in2 = ShortenedUrl.first_or_create(:url => 'http://www.google.es', :url_corta => 'google', :usuario => 'prueba@prueba.com')
+		
+		@id1 = 1
+		@url1 = 'http://github.com'
+		@url_corta1 = 'github'
+		@usuario1 = ''
+		
+		@id2 = 2
+		@url2 = 'http://www.google.es'
+		@url_corta2 = 'google'
+		@usuario2 = 'prueba@prueba.com'
 	end
 	
-	it "Imagen de título de la web" do
-		get '/'
-		assert last_response.body.include?("<title>AcortadorURLs</title>")
+	it "Comprobar que los valores insertados son correctos" do
+		assert @id1, @in1.id
+		assert @url1, @in1.url
+		assert @url_corta1, @in1.url_corta
+		assert @usuario1, @in1.usuario
+		
+		assert @id2, @in2.id
+		assert @url2, @in2.url
+		assert @url_corta2, @in2.url_corta
+		assert @usuario2, @in2.usuario
 	end
 	
-	it "Imagen título de la web mostrada" do
-		get '/'
-		assert last_response.body.include?("logo.png")
-	end
-	
-	it "Campo para la inserción de una url" do
-		get '/'
-		assert last_response.body.include?("URL")
-	end
-	
-	it "Campo para la inserción de una url corta" do
-		get '/'
-		assert last_response.body.include?("URL corta")
+	it "Comprobar que no usa la misma id para dos entradas" do
+		refute_equal @in1.id, @in2.id
 	end
 	
 end
