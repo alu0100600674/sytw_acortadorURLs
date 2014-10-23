@@ -11,10 +11,10 @@
                 %img.logo{:src => "/images/logo.png"}
             #login
                 %br
-                -if Email == ""
+                -if session[:email] == ""
                     %a.btn.btn-default{:href => "/auth/google_oauth2"}Iniciar Sesión con Google
                 -else
-                    Hola, #{Email}
+                    Hola, #{session[:email]}
                     %a.btn.btn-default{:href => "/auth/cerrarSesionGoogle"}Cerrar Sesión
             #formulario
                 %form.form-inline(action="/" method="POST")

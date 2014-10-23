@@ -35,11 +35,11 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 
 Base = 36
-Email = ""
 
 get '/' do
   puts "inside get '/': #{params}"
-  @list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :usuario => Email)
+  session[:email] = ""
+  @list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :usuario => session[:email])
   # in SQL => SELECT * FROM "ShortenedUrl" ORDER BY "id" ASC
   haml :index
 end
@@ -49,7 +49,7 @@ post '/' do
   uri = URI::parse(params[:url])
   if uri.is_a? URI::HTTP or uri.is_a? URI::HTTPS then
     begin
-      @short_url = ShortenedUrl.first_or_create(:url => params[:url], :url_corta => params[:url_corta], :usuario => Email)
+      @short_url = ShortenedUrl.first_or_create(:url => params[:url], :url_corta => params[:url_corta], :usuario => session[:email])
     rescue Exception => e
       puts "EXCEPTION!!!!!!!!!!!!!!!!!!!"
       pp @short_url
@@ -75,13 +75,13 @@ get '/:shortened' do
 end
 
 get '/auth/:name/callback' do
-  @auth = request.env['omniauth.auth']
-  Email = @auth['info'].email
+  session[:auth] = @auth = request.env['omniauth.auth']
+  session[:email] = @auth['info'].email
   
-  if @auth then
+  if session[:auth] then
     begin
       puts "inside get '/': #{params}"
-      @list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :usuario => Email)
+      @list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :usuario => session[:email])
       haml :index
     end
   else
@@ -90,13 +90,12 @@ get '/auth/:name/callback' do
 end
 
 get '/auth/failure' do
-  Email = ""
+  session.clear
   redirect '/'
 end
 
 get '/auth/cerrarSesionGoogle' do
-  Email = ""
-  # Falta cerrar la sesión de Google
+  session.clear
   redirect '/'
 end
 
