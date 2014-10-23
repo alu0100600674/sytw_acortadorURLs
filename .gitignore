@@ -1,6 +1,7 @@
 *.swp
 *~
 .bundle/
+Gemfile.lock
 
 my_shortened_urls.db
 
