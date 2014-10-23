@@ -11,7 +11,7 @@
                 %img.logo{:src => "/images/logo.png"}
             #login
                 %br
-                -if session[:email] == ""
+                -if !session[:auth]
                     %a.btn.btn-default{:href => "/auth/google_oauth2"}Iniciar Sesión con Google
                 -else
                     Hola, #{session[:email]}
