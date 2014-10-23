@@ -4,6 +4,7 @@
 Gemfile.lock
 
 my_shortened_urls.db
+pruebas.db
 
 .DS_Store
 .AppleDouble
