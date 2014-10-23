@@ -55,4 +55,8 @@ describe "Probando la base de datos" do
 		refute_equal @in1.id, @in2.id
 	end
 	
+	it "Comprobar que se ha introducido un usuario en una entrada de la bd" do
+		refute_equal @in2.usuario, @usuario1
+	end
+	
 end
