@@ -22,6 +22,9 @@ rake rackup
 Se puede acceder a la aplicación en:
 [http://acortadorurls.herokuapp.com](http://acortadorurls.herokuapp.com)
 
+### Integración Continua
+Hecha en Travis:
+[https://travis-ci.org/alu0100600674/sytw_acortadorURLs](https://travis-ci.org/alu0100600674/sytw_acortadorURLs)
 
 ### Enlaces de Interés
 
