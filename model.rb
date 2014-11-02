@@ -7,3 +7,9 @@ class ShortenedUrl
   property :usuario, Text
 end
 
+class Visitas
+  include DataMapper::Resource
+
+  property :url_corta, Text
+  property :n_visitas, Serial
+end
