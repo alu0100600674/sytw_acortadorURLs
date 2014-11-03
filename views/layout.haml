@@ -12,10 +12,11 @@
             #login
                 %br
                 -if !session[:auth]
-                    %a.btn.btn-default{:href => "/auth/google_oauth2"}Iniciar Sesión con Google
+                    %a.btn.btn-success{:href => "/auth/google_oauth2"}Iniciar Sesión con Google
                 -else
                     Hola, #{session[:email]}
-                    %a.btn.btn-default{:href => "/auth/cerrarSesionGoogle"}Cerrar Sesión
+                    %a.btn.btn-danger{:href => "/auth/cerrarSesionGoogle"}Cerrar Sesión
+                %a.btn.btn-default{:href => "/estadisticas"}Ver estadísticas
             #formulario
                 %form.form-inline(action="/" method="POST")
                     .form-group
@@ -35,7 +36,7 @@
                 Jonay Suárez Armas
                 %br
                 Sistemas y Tecnologías Web | Grado en Ingeniería Informática | ETSII | ULL
-        
-        
+
+
         %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"}
         %script{:src => "/js/bootstrap.min.js"}
