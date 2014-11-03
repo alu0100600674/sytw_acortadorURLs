@@ -104,4 +104,16 @@ get '/auth/cerrarSesionGoogle' do
   redirect '/'
 end
 
+get '/estadisticas/ver' do
+  total_visitas = 0
+  lista = ShortenedUrl.all(:order => [:id.asc])
+  for i in 0...3 do
+    total_visitas += lista[i].id
+  end
+
+  
+
+  haml :estad
+end
+
 error do haml :index end
