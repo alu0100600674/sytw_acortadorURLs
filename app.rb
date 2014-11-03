@@ -107,11 +107,18 @@ end
 get '/estadisticas/ver' do
   total_visitas = 0
   lista = ShortenedUrl.all(:order => [:id.asc])
-  for i in 0...3 do
+  tam = lista.length
+  for i in 0...tam do
     total_visitas += lista[i].id
   end
 
-  
+  porcentaje = Array.new
+  for i in 0...tam do
+    tmp = lista[i].n_visits
+    porcentaje.push(tmp)
+  end
+
+  puts porcentaje
 
   haml :estad
 end
