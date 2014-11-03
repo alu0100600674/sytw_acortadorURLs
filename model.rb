@@ -1,3 +1,9 @@
+require 'dm-core'
+require 'dm-migrations'
+require 'restclient'
+require 'xmlsimple'
+require 'dm-timestamps'
+
 class ShortenedUrl
   include DataMapper::Resource
 
@@ -5,11 +11,18 @@ class ShortenedUrl
   property :url, Text
   property :url_corta, Text
   property :usuario, Text
+  property :n_visits, Integer
+
+  # has n, :visits
 end
 
-class Visitas
-  include DataMapper::Resource
-
-  property :url_corta, Text
-  property :n_visitas, Serial
-end
+# class Visit
+#   include DataMapper::Resource
+#
+#   property :id, Serial
+#   property :created_at, DateTime
+#   property :ip, IPAddress
+#   property :country, String
+#
+#   belongs_to :shortenedurl
+# end

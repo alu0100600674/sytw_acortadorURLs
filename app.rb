@@ -49,7 +49,7 @@ post '/' do
   uri = URI::parse(params[:url])
   if uri.is_a? URI::HTTP or uri.is_a? URI::HTTPS then
     begin
-      @short_url = ShortenedUrl.first_or_create(:url => params[:url], :url_corta => params[:url_corta], :usuario => session[:email])
+      @short_url = ShortenedUrl.first_or_create(:url => params[:url], :url_corta => params[:url_corta], :usuario => session[:email], :n_visits => 0)
     rescue Exception => e
       puts "EXCEPTION!!!!!!!!!!!!!!!!!!!"
       pp @short_url
@@ -63,8 +63,13 @@ end
 
 get '/:shortened' do
   puts "inside get '/:shortened': #{params}"
-    
+
   short_url = ShortenedUrl.first(:url_corta => params[:shortened].to_s)
+
+  puts short_url.n_visits
+  short_url.n_visits += 1
+  puts short_url.n_visits
+  short_url.save
 
   # HTTP status codes that start with 3 (such as 301, 302) tell the
   # browser to go look for that resource in another location. This is
@@ -77,7 +82,7 @@ end
 get '/auth/:name/callback' do
   session[:auth] = @auth = request.env['omniauth.auth']
   session[:email] = @auth['info'].email
-  
+
   if session[:auth] then
     begin
       puts "inside get '/': #{params}"

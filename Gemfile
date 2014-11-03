@@ -9,6 +9,10 @@ gem 'omniauth-google-oauth2'
 gem 'erubis'
 gem 'rack-test'
 
+gem 'rest-client'
+gem 'xml-simple'
+gem 'chartkick'
+
 group :development do
   gem 'dm-sqlite-adapter'
   gem 'sqlite3'
