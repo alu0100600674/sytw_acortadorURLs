@@ -19,7 +19,8 @@
                     Hola, #{session[:email]}
                     %a.btn.btn-danger{:href => "/auth/cerrarSesionGoogle"}Cerrar Sesión
                 %a.btn.btn-default{:href => "/"}Ver URLs Guardadas
-                %a.btn.btn-default{:href => "/estadisticas/ver"}Ver estadísticas
+                %a.btn.btn-default{:href => "/estadisticas/ver"}Estadísticas (visitas)
+                %a.btn.btn-default{:href => "/estadisticas/lugares"}Estadísticas (lugares)
             #formulario
                 %form.form-inline(action="/" method="POST")
                     .form-group

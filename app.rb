@@ -122,4 +122,9 @@ get '/estadisticas/ver' do
   haml :estad
 end
 
+get '/estadisticas/lugares' do
+
+  haml :lugares
+end
+
 error do haml :index end
