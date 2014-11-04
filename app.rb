@@ -105,6 +105,10 @@ get '/auth/cerrarSesionGoogle' do
   redirect '/'
 end
 
+get'/otros/urlsGuardadas' do
+  haml :index
+end
+
 get '/estadisticas/ver' do
   total_visitas = 0
   lista = ShortenedUrl.all(:order => [:id.asc])
