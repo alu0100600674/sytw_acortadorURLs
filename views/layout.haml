@@ -18,9 +18,12 @@
                 -else
                     Hola, #{session[:email]}
                     %a.btn.btn-danger{:href => "/auth/cerrarSesionGoogle"}Cerrar Sesión
+                %br
+                %br
                 %a.btn.btn-default{:href => "/"}Ver URLs Guardadas
-                %a.btn.btn-default{:href => "/estadisticas/ver"}Estadísticas (visitas)
-                %a.btn.btn-default{:href => "/estadisticas/lugares"}Estadísticas (lugares)
+                %a.btn.btn-default{:href => "/estadisticas/visitas"}Estadísticas (visitas)
+                %a.btn.btn-default{:href => "/estadisticas/paises"}Estadísticas (países)
+                %a.btn.btn-default{:href => "/estadisticas/dias"}Estadísticas (días)
             #formulario
                 %form.form-inline(action="/" method="POST")
                     .form-group

@@ -16,13 +16,13 @@ class ShortenedUrl
   # has n, :visits
 end
 
-# class Visit
-#   include DataMapper::Resource
-#
-#   property :id, Serial
-#   property :created_at, DateTime
-#   property :ip, IPAddress
-#   property :country, String
-#
-#   belongs_to :shortenedurl
-# end
+class Visit
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :created_at, DateTime
+  property :ip, IPAddress
+  property :country, String
+
+  # belongs_to :shortenedurl
+end

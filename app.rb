@@ -12,6 +12,9 @@ require 'omniauth-google-oauth2'
 require 'erubis'
 require 'chartkick'
 
+require 'restclient'
+require 'xmlsimple'
+
 ############OmniAuth Google####################
 use OmniAuth::Builder do
   config = YAML.load_file 'config/config.yml'
@@ -109,7 +112,7 @@ get'/otros/urlsGuardadas' do
   haml :index
 end
 
-get '/estadisticas/ver' do
+get '/estadisticas/visitas' do
   lista = ShortenedUrl.all(:order => [:id.asc])
 
   @lista_visitas = Array.new
@@ -122,9 +125,14 @@ get '/estadisticas/ver' do
   haml :estad
 end
 
-get '/estadisticas/lugares' do
+get '/estadisticas/paises' do
 
   haml :lugares
+end
+
+get '/estadisticas/dias' do
+
+  haml :dias
 end
 
 error do haml :index end
