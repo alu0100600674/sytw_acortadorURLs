@@ -110,21 +110,14 @@ get'/otros/urlsGuardadas' do
 end
 
 get '/estadisticas/ver' do
-  total_visitas = 0
   lista = ShortenedUrl.all(:order => [:id.asc])
-  tam = lista.length
-  for i in 0...tam do
-    total_visitas += lista[i].id
-  end
 
   @lista_visitas = Array.new
-  for i in 0...tam do
+  for i in 0...lista.length do
     tmp1 = lista[i].url_corta
     tmp2 = lista[i].n_visits
     @lista_visitas.push([tmp1, tmp2])
   end
-
-  # puts @porcentaje
 
   haml :estad
 end
