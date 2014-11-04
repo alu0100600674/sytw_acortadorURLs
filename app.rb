@@ -10,6 +10,7 @@ require 'data_mapper'
 require 'omniauth-oauth2'
 require 'omniauth-google-oauth2'
 require 'erubis'
+require 'chartkick'
 
 ############OmniAuth Google####################
 use OmniAuth::Builder do
@@ -112,13 +113,14 @@ get '/estadisticas/ver' do
     total_visitas += lista[i].id
   end
 
-  porcentaje = Array.new
+  @porcentaje = Array.new
   for i in 0...tam do
-    tmp = lista[i].n_visits
-    porcentaje.push(tmp)
+    tmp1 = lista[i].url_corta
+    tmp2 = lista[i].n_visits
+    @porcentaje.push([tmp1, tmp2])
   end
 
-  puts porcentaje
+  puts @porcentaje
 
   haml :estad
 end

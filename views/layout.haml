@@ -5,7 +5,7 @@
         %meta{:charset => "utf-8"}/
         %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}/
         %link{:href => "/css/style.css", :rel => "stylesheet"}/
-        %script{:src => "//www.google.com/jsapi"}
+        %script{:src => "http://www.google.com/jsapi"}
         %script{:src => "/js/chartkick.js"}
     %body
         #contenedor
@@ -32,7 +32,6 @@
                         %input.form-control(type="text" name="url_corta" id="myurl_corta" size=25 accesskey="c" placeholder="URL corta")
                         %input.btn.btn-default(type="submit" value="Acortar")
             #datos
-                %h2 URLs Guardadas:
                 =yield
             #pie
                 Jonay Suárez Armas

@@ -1,4 +1,5 @@
+%h2 URLs Guardadas:
 %ol
   - @list.each do |url|
-    %li 
+    %li
       %a{:href=>"/#{url.url_corta.to_s}"} #{url.url}
