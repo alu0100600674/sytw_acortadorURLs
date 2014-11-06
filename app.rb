@@ -15,6 +15,10 @@ require 'chartkick'
 require 'restclient'
 require 'xmlsimple'
 
+require 'dm-core'
+require 'dm-migrations'
+require 'dm-timestamps'
+
 ############OmniAuth Google####################
 use OmniAuth::Builder do
   config = YAML.load_file 'config/config.yml'
@@ -75,6 +79,12 @@ get '/:shortened' do
   puts short_url.n_visits
   short_url.save
 
+  puts "*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*"
+
+  loc_datos = get_localizacion
+  visit = Visit.new(:id => short_url.id, :created_at => Time.now, :ip => loc_datos['ip'], :country => loc_datos['countryName'])
+  visit.save
+
   # HTTP status codes that start with 3 (such as 301, 302) tell the
   # browser to go look for that resource in another location. This is
   # used in the case where a web page has moved to another location or
@@ -126,13 +136,46 @@ get '/estadisticas/visitas' do
 end
 
 get '/estadisticas/paises' do
+  lista = Visit.all(:order => [:id.asc])
+
+  @lista_visitas = Array.new
+  for i in 0...lista.length do
+    tmp1 = lista[i].created_at
+    tmp2 = lista[i].id  //Sustituir por número de visitas de cada día.
+    @lista_visitas.push([tmp1, tmp2])
+  end
 
   haml :lugares
 end
 
 get '/estadisticas/dias' do
+  lista = Visit.all(:order => [:id.asc])
+
+  @lista_visitas = Array.new
+  for i in 0...lista.length do
+    tmp1 = lista[i].created_at
+    tmp2 = lista[i].id  //Sustituir por número de visitas de cada día.
+    @lista_visitas.push([tmp1, tmp2])
+  end
 
   haml :dias
+end
+
+def get_remote_ip(env)
+  puts "request.url = #{request.url}"
+  puts "request.ip = #{request.ip}"
+  if addr = env['HTTP_X_FORWARDED_FOR']
+    puts "env['HTTP_X_FORWARDED_FOR'] = #{addr}"
+    addr.split(',').first.strip
+  else
+    puts "env['REMOTE_ADDR'] = #{env['REMOTE_ADDR']}"
+    env['REMOTE_ADDR']
+  end
+end
+
+def get_localizacion
+  xml = RestClient.get "http://api.hostip.info/get_xml.php?ip=#{get_remote_ip(env)}";
+  cc = XmlSimple.xml_in(xml.to_s)
 end
 
 error do haml :index end

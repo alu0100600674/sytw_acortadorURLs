@@ -13,7 +13,7 @@ class ShortenedUrl
   property :usuario, Text
   property :n_visits, Integer
 
-  # has n, :visits
+  has n, :visits
 end
 
 class Visit
@@ -24,5 +24,5 @@ class Visit
   property :ip, IPAddress
   property :country, String
 
-  # belongs_to :shortenedurl
+  belongs_to :shortened_url
 end
