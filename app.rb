@@ -141,7 +141,7 @@ get '/estadisticas/paises' do
   @lista_visitas = Array.new
   for i in 0...lista.length do
     tmp1 = lista[i].created_at
-    tmp2 = lista[i].id  //Sustituir por número de visitas de cada día.
+    tmp2 = lista[i].id  #Sustituir por número de visitas de cada día.
     @lista_visitas.push([tmp1, tmp2])
   end
 
@@ -154,7 +154,7 @@ get '/estadisticas/dias' do
   @lista_visitas = Array.new
   for i in 0...lista.length do
     tmp1 = lista[i].created_at
-    tmp2 = lista[i].id  //Sustituir por número de visitas de cada día.
+    tmp2 = lista[i].id  #Sustituir por número de visitas de cada día.
     @lista_visitas.push([tmp1, tmp2])
   end
 
