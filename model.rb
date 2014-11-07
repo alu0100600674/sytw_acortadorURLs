@@ -26,6 +26,14 @@ class Visit
 
   belongs_to :shortened_url
 
+  before :create, :set_country
+
+  def set_country
+    xml = RestClient.get "http://ip-api.com/xml/#{self.ip}"
+    self.country = XmlSimple.xml_in(xml.to_s, { 'ForceArray' => false })['country'].to_s
+    self.save
+  end
+
   def self.contador_fecha(id)
     repository(:default).adapter.select("SELECT date(created_at) AS date, count(*) AS count FROM visits WHERE shortened_url_id = '#{id}' GROUP BY date(created_at)")
   end
