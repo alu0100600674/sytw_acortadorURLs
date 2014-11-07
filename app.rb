@@ -151,19 +151,16 @@ get '/estadisticas/mas/:shortened' do
   @country = Hash.new
   @time = Hash.new
 
-  @visitas.each { |item|
-    if(@country[item.country].nil? == true)
-      @country[item.country] = 1
-    else
-      @country[item.country] +=1
-    end
+    pais = @visitas.contador_pais(@url.id)
+				pais.each do |i|
+					@country[i.country] = i.count
+				end
 
-    if(@time[item.created_at].nil? == true)
-      @time[item.created_at] = 1
-    else
-      @time[item.created_at] +=1
+    dia = @visitas.contador_fecha(@url.id)
+				dia.each do |i|
+					@time[i.date] = i.count
+
     end
-  }
 
   haml :estadespecifica
 end

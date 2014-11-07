@@ -25,4 +25,13 @@ class Visit
   property :country, String
 
   belongs_to :shortened_url
+
+  def self.contador_fecha(id)
+    repository(:default).adapter.select("SELECT date(created_at) AS date, count(*) AS count FROM visits WHERE shortened_url_id = '#{id}' GROUP BY date(created_at)")
+  end
+
+  def self.contador_pais(id)
+    repository(:default).adapter.select("SELECT country, count(*) as count FROM visits where shortened_url_id= '#{id}' group by country")
+  end
+
 end
