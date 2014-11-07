@@ -81,8 +81,12 @@ get '/:shortened' do
 
   puts "*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*"
 
+
   loc_datos = get_localizacion
   visit = Visit.new(:id => short_url.id, :created_at => Time.now, :ip => loc_datos['ip'], :country => loc_datos['countryName'])
+  short_url.visits << visit
+  visit.shortened_url = short_url
+  short_url.save
   visit.save
 
   # HTTP status codes that start with 3 (such as 301, 302) tell the
