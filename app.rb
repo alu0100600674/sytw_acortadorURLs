@@ -139,30 +139,33 @@ get '/estadisticas/visitas' do
   haml :estad
 end
 
-get '/estadisticas/paises' do
-  lista = Visit.all(:order => [:id.asc])
+get '/estadisticas/mas' do
+  @list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :usuario => session[:email])
 
-  @lista_visitas = Array.new
-  for i in 0...lista.length do
-    tmp1 = lista[i].created_at
-    tmp2 = lista[i].id  #Sustituir por número de visitas de cada día.
-    @lista_visitas.push([tmp1, tmp2])
-  end
-
-  haml :lugares
+  haml :listaestad
 end
 
-get '/estadisticas/dias' do
-  lista = Visit.all(:order => [:id.asc])
+get '/estadisticas/mas/:shortened' do
+  @url = ShortenedUrl.first(:url_corta => params[:shortened])
+  @visitas = Visit.all(:order => [ :id.asc ], :shortened_url_id => @url.id)
+  @country = Hash.new
+  @time = Hash.new
 
-  @lista_visitas = Array.new
-  for i in 0...lista.length do
-    tmp1 = lista[i].created_at
-    tmp2 = lista[i].id  #Sustituir por número de visitas de cada día.
-    @lista_visitas.push([tmp1, tmp2])
-  end
+  @visitas.each { |item|
+    if(@country[item.country].nil? == true)
+      @country[item.country] = 1
+    else
+      @country[item.country] +=1
+    end
 
-  haml :dias
+    if(@time[item.created_at].nil? == true)
+      @time[item.created_at] = 1
+    else
+      @time[item.created_at] +=1
+    end
+  }
+
+  haml :estadespecifica
 end
 
 def get_remote_ip(env)

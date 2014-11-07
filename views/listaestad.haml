@@ -1,0 +1,5 @@
+%h2 Ver Estadísticas:
+%ol
+  - @list.each do |url|
+    %li
+      %a{:href=>"/estadisticas/mas/#{url.url_corta.to_s}"} #{url.url}
