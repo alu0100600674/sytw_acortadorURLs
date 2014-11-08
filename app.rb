@@ -83,7 +83,7 @@ get '/:shortened' do
 
 
   loc_datos = get_localizacion
-  visit = Visit.new(:id => short_url.id, :created_at => Time.now, :ip => loc_datos['ip'])
+  visit = Visit.new(:created_at => Time.now, :ip => loc_datos['ip'])
   short_url.visits << visit
   visit.shortened_url = short_url
   short_url.save
